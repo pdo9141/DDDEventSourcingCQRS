@@ -105,3 +105,13 @@ CQRS (Command Query Responsiblity Segregation)
 		public void Handle(StartCheckoutCommand message) {}
 	}
 
+Event Sourcing
+01) It's about ensuring that all changes made to the application state during the entire lifetime of the application are stored as a sequence of events.
+02) Instead of modeling a shopping cart for example you can represent the state of the shopping cart by event representation. Add item #1 > Add item #2 >
+	Add payment info > Update item #2 > Remove item #1 > Adding shipping info
+03) CRUD = current state storage (snapshot), Event Sourcing = event-based representation of data
+04) Event is something that has happened in the past. Events are expression of the ubiquitous language. Events are not imperative and are named using past tense verbs.
+	Have a persistent store for events. Append-only, no delete. Replay the (related) events to get to the last known state of an entity. Once stored, events are immutable.
+	Can be duplicated and replicated (for scalability reasons). Any behavior associated with he event has been performed. Replaying the event doesn't require to repeat the behavior.
+	You don't miss a thing. Track everything that happened at the time it happened. Regardless of the effects it produced.
+05) Event-based Data Stores, Event Store (http://geteventstore.com)
